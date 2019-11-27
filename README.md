@@ -1,5 +1,5 @@
 
-## Deep Subspace Networks
+## Deep Subspace Networks for Few-Shot Learning
 Metalearn Workshop at Neurips 2019. (Spotlight)
 
 Code will be available soon.
