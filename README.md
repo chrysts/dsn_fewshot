@@ -1,15 +1,15 @@
 
-## Deep Subspace Networks for Few-Shot Learning
-Metalearn Workshop at Neurips 2019. (Spotlight)
+## Adaptive Subspaces for Few-Shot Learning
+Computer Vision and Patern Recognition
 
 Code will be available soon.
 
 
 ```
-@incollection{csimon2019dsn,
+@incollection{simon2020dsn,
         author       = {C. Simon}, {P. Koniusz}, {R. Nock}, and {M. Harandi}
-        title        = {{Deep Subspace Networks for Few-Shot Learning}},
-        booktitle    = {Workshop on Meta-Learning at NeurIPS}
-        year         = 2019
+        title        = {{Adaptive Subspaces for Few-Shot Learning}},
+        booktitle    = {CVPR}
+        year         = 2020
        }
 ```       
