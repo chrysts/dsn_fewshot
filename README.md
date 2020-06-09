@@ -6,10 +6,10 @@ Code will be available soon.
 
 
 ```
-@incollection{simon2020dsn,
+@inproceedings{simon2020dsn,
         author       = {C. Simon}, {P. Koniusz}, {R. Nock}, and {M. Harandi}
-        title        = {{Adaptive Subspaces for Few-Shot Learning}},
-        booktitle    = {CVPR}
+        title        = {Adaptive Subspaces for Few-Shot Learning},
+        booktitle    = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
         year         = 2020
        }
 ```       
