@@ -1,0 +1,223 @@
+import torch
+import torch.nn.functional as F
+import numpy as np
+import torch.nn as nn
+
+class Projection(nn.Module):
+    def __init__(self, n_shot, n_unlabel=5, n_way=5, m_unlabel=5, num_hdistractor=0, alpha=0.0):
+        super().__init__()
+
+        div = 1
+        if num_hdistractor > 0:
+            div = 2
+
+        self.num_dim = n_shot-1# n_shot-1
+        if self.num_dim < 2:
+            self.num_dim = 2
+        self.k_subspace = self.num_dim#n_unlabel//(div*div*n_way) + self.num_dim
+        self.eps = 1e-12
+        self.n_shot = n_shot
+        self.slack = 0.399089934
+        self.n_way = n_way
+        self.div = 2*(1**2)
+        self.alpha = alpha
+        # self.ww = nn.Parameter(torch.rand(1600, dtype=torch.float, requires_grad=True))
+        self.bb = nn.Parameter(torch.rand(1, dtype=torch.float, requires_grad=True))
+
+    def refine_means(self, mean_classes, unlabeled_features):
+        feature_size = mean_classes.size(-1)
+        temp_add = torch.zeros_like(mean_classes)
+        temp_add_softassign = torch.zeros_like(mean_classes)
+        # for unlabeled_feature in unlabeled_features:
+        #     feat = unlabeled_feature.expand_as(mean_classes)
+        #     dist = feat - mean_classes
+        #     dist = torch.sum(dist*dist, dim=-1)/1.#/self.div
+        #     softassign = F.softmax(-dist).unsqueeze(-1).repeat(1, feature_size).float()
+        #     temp_add = temp_add + softassign*feat#*masking_cos
+        #     temp_add_softassign = temp_add_softassign + softassign#*masking_cos
+
+        unlabeled_features_ext = unlabeled_features.unsqueeze(1).repeat(1, mean_classes.shape[0], 1)
+        dist = unlabeled_features_ext - mean_classes.unsqueeze(0)
+        dist = torch.sum(dist*dist, dim=-1)/40.#0.08#0.005#self.bb
+        softassign = F.softmax(-dist, dim=-1) # QZ, N
+
+        softassigntotal = softassign.sum(0) #N
+
+        softassign = softassign.unsqueeze(-1).repeat(1, 1, feature_size) #[QZ, N, FZ]
+        unlabeled_softassign = softassign*unlabeled_features_ext
+        unlabeled_softassign = unlabeled_softassign.transpose(0, 1)#N ,QZ, FZ
+        unlabeled_softassign = unlabeled_softassign.sum(1)#N, FZ
+
+        mean_classes = mean_classes[:self.n_way]
+        temp_add = unlabeled_softassign[:self.n_way]
+        temp_add_softassign = softassigntotal[:self.n_way]
+        divv = (self.n_shot + temp_add_softassign)
+        divv = divv.unsqueeze(-1).repeat(1, feature_size)#expand_as(mean_classes)
+        mean_refines = (mean_classes*self.n_shot + temp_add) / divv
+
+        return mean_refines, divv
+
+    def refine_mean_include_outliers(self, support_features, unlabeled_features):
+
+        mean_all = []
+
+        for ii in range(self.n_way):
+            #all_features = torch.cat((support_features[ii], unlabeled_features), dim=0)
+            mean_all.append(torch.mean(torch.cat((support_features[ii], unlabeled_features), dim=0), dim=0))
+
+        mean_all = torch.stack(mean_all)
+        return mean_all
+
+    def hyperplanes(self, supportset_features, unlabeled_features, class_size, sample_size, unlabeled_size, epoch=1000):
+        all_hyper_planes = []
+        num_dim = self.num_dim
+        mean_classes = []
+        feature_size = supportset_features.shape[2]
+        all_ee_lambda = []
+
+        for ii in range(class_size):
+            support_set_features_class = supportset_features[ii]
+            meann_init = torch.mean(support_set_features_class, dim=0)
+            mean_classes.append(torch.mean(support_set_features_class, dim=0))
+
+        #change this to apply semisupervised soft assignment
+        #mean_classes.append(torch.zeros_like(meann_init))
+        mean_classes = torch.stack(mean_classes, dim=0)
+        mean_refines = mean_classes
+
+        if epoch > 60:
+            mean_refines, num_dim_new = self.refine_means(mean_classes, unlabeled_features)#self.refine_mean_include_outliers(supportset_features, unlabeled_features)#self.refine_means(mean_classes, unlabeled_features)
+
+        #num_dim = torch.min(num_dim_new).int()
+
+        #needtocommentout
+        #mean_refines = []
+
+        for ii in range(class_size):
+            all_support_class = supportset_features[ii]
+            #all_support_class = unlabeled_features[0:25]#torch.cat((supportset_features[ii], unlabeled_features[0:25]))
+            #1-shot
+            #meannn = torch.mean(all_support_class, dim=0)
+            #all_support_class_t = all_support_class - meannn
+            #mean_refines.append(meannn)
+            #means = torch.mean(all_support_class, dim=0)
+            all_support_class_t = all_support_class - mean_refines[ii].expand_as(all_support_class)#- mean_refines[ii].expand_as(all_support_class)
+            all_support_class_t = torch.transpose(all_support_class_t, 0, 1)
+            uu, s, v = torch.svd(all_support_class_t, some=False)
+
+
+            # square_mat = torch.matmul(all_support_class, all_support_class_t) #featurebyfeature
+            # tr_sq_mat = torch.trace(square_mat)
+            # singular_values = s.double()
+            # torch.max(singular_values) - torch.min(singular_values)
+            # lambda1 = singular_values.unsqueeze(-1).repeat(1, num_dim)
+            # lambda2 = singular_values.repeat(num_dim).view(-1, num_dim)
+            # sel = lambda1 - lambda2
+            # diff = 1e-4#torch.abs(sel[torch.nonzero(sel)])
+            #
+            # ee_lambda = (lambda1 - lambda2)/(diff*(tr_sq_mat.double() + self.eps))
+            # ee_lambda = ee_lambda*ee_lambda
+            # all_ee_lambda.append(ee_lambda)
+
+
+            uu_mean = uu[:, :self.num_dim] #+ mean_refines[ii].unsqueeze(-1).repeat(1, num_dim)
+
+
+            # newfeatures = []
+            # for kk in range(1, 10):
+            #     uu_expanded = uu[:, kk].unsqueeze(-1)
+            #     vv_expanded = v[:, kk].unsqueeze(0)
+            #     newfeat = s[kk]*torch.mm(uu_expanded, vv_expanded)
+            #     if kk == 0 :
+            #         newfeatures = newfeat
+            #     else:
+            #         newfeatures = newfeatures + newfeat
+            #
+            #
+            # newfeatures
+
+            #mean_refines.append(means)
+            all_hyper_planes.append(uu_mean)
+
+        #mean_refines = torch.stack(mean_refines, dim=0)
+        all_hyper_planes = torch.stack(all_hyper_planes, dim=0)
+        all_ee_lambda = []# torch.stack(all_ee_lambda, dim=0)
+
+        return all_hyper_planes, all_ee_lambda, mean_refines
+
+
+    def projection_metric(self, target_features, hyperplanes, mu):
+        eps = 1e-8
+        batch_size = target_features.shape[0]
+        feature_size = target_features.shape[1]
+        class_size = hyperplanes.shape[0]
+
+        target_features_expanded = target_features.unsqueeze(-1)
+        discriminative_loss = 0.0
+
+        similarities = []
+        for j in range(class_size):
+            h_plane_j = torch.squeeze(hyperplanes[j]).unsqueeze(0).repeat(batch_size, 1, 1)
+            target_features_expanded = (target_features- mu[j].expand_as(target_features)).unsqueeze(-1)
+            projected_query_j = torch.bmm(h_plane_j, torch.bmm(torch.transpose(h_plane_j, 1, 2), target_features_expanded))
+            projected_query_j = torch.squeeze(projected_query_j) + mu[j].unsqueeze(0).repeat(batch_size, 1)
+            projected_query_dist_inter = target_features - projected_query_j
+            #query_loss = -torch.sqrt(torch.sum(projected_query_dist_inter*projected_query_dist_inter, dim=-1) + eps)
+            #query_loss = -torch.pow(torch.sqrt(torch.sum(projected_query_dist_inter*projected_query_dist_inter, dim=-1) + eps), 2)
+            query_loss = -(torch.sum(projected_query_dist_inter*projected_query_dist_inter, dim=-1))
+            #query_loss = torch.exp(query_loss)
+            similarities.append(query_loss)
+
+            for k in range(class_size):
+                if j != k:
+                    temp_loss = torch.mm(torch.transpose(hyperplanes[j], 0, 1), hyperplanes[k])
+                    discriminative_loss = discriminative_loss + torch.sum(temp_loss*temp_loss)
+            #query_loss_inter_class_temp = torch.exp(-query_loss_inter_class_temp)
+        similarities = torch.stack(similarities, dim=1)
+
+        return similarities, discriminative_loss
+
+    def projection_metric1shot(self, target_features, hyperplanes, mu):
+        eps = 1e-8
+        batch_size = target_features.shape[0]
+        feature_size = target_features.shape[1]
+        class_size = hyperplanes.shape[0]
+
+        target_features_expanded = target_features.unsqueeze(-1)
+        discriminative_loss = 0.0
+
+        similarities = []
+        for j in range(class_size):
+            h_plane_j = torch.squeeze(hyperplanes[j]).unsqueeze(0).repeat(batch_size, 1, 1)
+            target_features_expanded = (target_features- mu[j].expand_as(target_features)).unsqueeze(-1)
+            projected_query_j = torch.bmm(h_plane_j, torch.bmm(torch.transpose(h_plane_j, 1, 2), target_features_expanded))
+            projected_query_j = torch.squeeze(projected_query_j) + mu[j].unsqueeze(0).repeat(batch_size, 1)
+            projected_query_dist_inter = target_features - projected_query_j
+            #query_loss = -torch.sqrt(torch.sum(projected_query_dist_inter*projected_query_dist_inter, dim=-1) + eps)
+            #query_loss = -torch.pow(torch.sqrt(torch.sum(projected_query_dist_inter*projected_query_dist_inter, dim=-1) + eps), 2)
+            query_loss = -(torch.sum(projected_query_dist_inter*projected_query_dist_inter, dim=-1))
+            #query_loss = torch.exp(query_loss)
+            similarities.append(query_loss)
+
+            for k in range(class_size):
+                if j != k:
+                    temp_loss = torch.mm(torch.transpose(hyperplanes[j], 0, 1), hyperplanes[k])
+                    discriminative_loss = discriminative_loss + torch.sum(temp_loss*temp_loss)
+            #query_loss_inter_class_temp = torch.exp(-query_loss_inter_class_temp)
+        similarities = torch.stack(similarities, dim=1)
+
+        return similarities, discriminative_loss
+
+
+
+    def calc_regularization(self, ee_lambdas, class_size):
+        bheta = 1e2
+        delta = 1600*1600
+
+        KK = torch.exp(-ee_lambdas)
+
+        total_sum = (bheta*torch.sum(KK)/delta)/class_size
+
+        total_sum = total_sum.float()
+
+        return total_sum
