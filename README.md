@@ -17,6 +17,7 @@ There are two backbones separated in different folders.
 ## DATASET
 - mini-ImageNet: [Google Drive](https://drive.google.com/file/d/1HkgrkAwukzEZA0TpO7010PkAOREb2Nuk) (3 GB)
 - tiered-ImageNet: [Google Drive](https://drive.google.com/file/d/1g1aIDy2Ar_MViF2gDXFYDBTR-HYecV07) (12 GB)
+- OpenMIC: [Fill the form and download](http://users.cecs.anu.edu.au/~koniusz/openmic-dataset/) (0.3 GB)
 - CIFAR100: [CS TORONTO](https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz) (0.2 GB)
 
 ## USAGE
