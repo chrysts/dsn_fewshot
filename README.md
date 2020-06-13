@@ -9,13 +9,18 @@
 
 There are two backbones separated in different folders. 
 - Conv-4, there are two datasets using this backbone: mini-ImageNet and OpenMIC. 
-- ResNet-12, there are three datasets using this backbone: mini-ImageNet, tiered-ImageNet, and Cifar-FS.
+- ResNet-12, there are three datasets using this backbone: mini-ImageNet, tiered-ImageNet, and Cifar-FS. [COMINGSOON]
 
-Run mini-ImageNet:
+Train mini-ImageNet:
 
 ``` python3 train_subspace_discriminative.py --data-path 'yourdatafolder' ```
 
-Run OpenMIC:
+Evaluate mini-ImageNet:
+
+``` python3 test_subspace_discriminative.py --data-path 'yourdatafolder' ```
+
+
+Train OpenMIC:
 
 ```python3 train_subspace_museum.py --data-path 'yourdatafolder'  ```
 
@@ -37,7 +42,7 @@ Cite:
 
 
 
-Thank you for Prototypical Networks and MetaOpt for the baseline code 
+Thank you for the codebases:
 
 https://github.com/jakesnell/prototypical-networks
 
