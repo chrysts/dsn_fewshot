@@ -1,6 +1,5 @@
 
 ## Adaptive Subspaces for Few-Shot Learning
-Computer Vision and Patern Recognition 2020.
 
 ![img](https://raw.githubusercontent.com/chrysts/chrysts.github.io/master/images/psn.jpg) 
 
@@ -9,10 +8,13 @@ Computer Vision and Patern Recognition 2020.
 - PyTorch 1.0 or above
 - Python 3.6
 
+
 There are two backbones separated in different folders. 
 - Conv-4, there are two datasets using this backbone: mini-ImageNet and OpenMIC. 
 - ResNet-12, there are three datasets using this backbone: mini-ImageNet, tiered-ImageNet, and Cifar-FS.
-we use the code provided from https://github.com/kjunelee/MetaOptNet
+We use the code provided from https://github.com/kjunelee/MetaOptNet
+
+
 
 Run mini-ImageNet:
 
