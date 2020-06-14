@@ -52,12 +52,12 @@ Cite:
 
 
 
-
+### Acknowledgement
 Thank you for the codebases:
 
-https://github.com/jakesnell/prototypical-networks
+[Prototypical Network](https://github.com/jakesnell/prototypical-networks)
 
-https://github.com/kjunelee/MetaOptNet
+[MetaOpt](https://github.com/kjunelee/MetaOptNet)
 
 
 
