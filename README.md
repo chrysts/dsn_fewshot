@@ -38,7 +38,7 @@ Train OpenMIC:
 
 
 
-Cite:
+## Citation:
 
 ```
 @inproceedings{simon2020dsn,
@@ -52,7 +52,7 @@ Cite:
 
 
 
-### Acknowledgement
+## Acknowledgement
 Thank you for the codebases:
 
 [Prototypical Network](https://github.com/jakesnell/prototypical-networks)
