@@ -48,6 +48,9 @@ Train OpenMIC:
 
 #### ResNet-12
 
+Note: Training using ResNet-12 requires 4 GPUs with ~10GB/GPU
+
+
 Set the image folders:
 ```
 _IMAGENET_DATASET_DIR = './miniimagenet/' (in data/mini_imagenet.py)
