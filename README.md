@@ -48,11 +48,12 @@ Train OpenMIC:
 
 #### ResNet-12
 
-SET your image folders :
-- _IMAGENET_DATASET_DIR = './miniimagenet/'
-- _TIERED_IMAGENET_DATASET_DIR = '/tieredimagenet/' 
-- _CIFAR_FS_DATASET_DIR = './cifar/CIFAR-FS/'
-
+Set the image folders:
+```
+_IMAGENET_DATASET_DIR = './miniimagenet/' (in data/mini_imagenet.py)
+_TIERED_IMAGENET_DATASET_DIR = '/tieredimagenet/' (in data/tiered_imagenet.py)
+_CIFAR_FS_DATASET_DIR = './cifar/CIFAR-FS/' (in data/CIFAR_FS.py)
+```
 
 
 Train mini-ImageNet:
