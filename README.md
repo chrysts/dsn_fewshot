@@ -18,7 +18,7 @@ CVPR 2020
 
 There are two backbones separated in different folders. 
 - Conv-4, there are two datasets using this backbone: mini-ImageNet and OpenMIC. 
-- ResNet-12, there are three datasets using this backbone: mini-ImageNet, tiered-ImageNet, and Cifar-FS. [COMINGSOON]
+- ResNet-12, there are three datasets using this backbone: mini-ImageNet, tiered-ImageNet, and Cifar-FS. 
 
 
 ## DATASET
