@@ -7,8 +7,17 @@ The repository contains the code for:
 <br/>
 CVPR 2020
 
-<img src="https://raw.githubusercontent.com/chrysts/chrysts.github.io/master/images/psn.jpg" width="700" height="200" />
-(Left) Matching Network, (Middle) Prototypical Network, (Right) Adaptive Subspace Network/Ours
+Our pipeline:
+<br/>
+<img src="https://github.com/chrysts/dsn_fewshot/blob/master/pipeline.png?raw=true" height="175px" width="700px" />
+
+
+Comparison with previous methods:
+<br/>
+<img src="https://github.com/chrysts/dsn_fewshot/blob/master/comparison.png?raw=true" height="173px" width="700px"  />
+
+
+
 
 ## OVERVIEW
 
