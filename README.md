@@ -9,12 +9,12 @@ CVPR 2020
 
 Our pipeline:
 <br/>
-<img src="https://github.com/chrysts/dsn_fewshot/blob/master/pipeline.png?raw=true" height="175px" width="700px" />
+<img src="https://github.com/chrysts/dsn_fewshot/blob/master/pipeline.png?raw=true"  height="145px" width="640px" />
 
 
 Comparison with previous methods:
 <br/>
-<img src="https://github.com/chrysts/dsn_fewshot/blob/master/comparison.png?raw=true" height="173px" width="700px"  />
+<img src="https://github.com/chrysts/dsn_fewshot/blob/master/comparison.png?raw=true" height="145px" width="640px"  />
 
 
 
