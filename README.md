@@ -59,15 +59,15 @@ _CIFAR_FS_DATASET_DIR = './cifar/CIFAR-FS/' (in data/CIFAR_FS.py)
 Train mini-ImageNet:
 
 ```
-        python3 train.py --gpu 0,1,2,3 --save-path "./experiments/miniImageNet_subspace" --train-shot 15 --\
-        --head Subspace --network ResNet --dataset miniImageNet --eps 0.1
+  python3 train.py --gpu 0,1,2,3 --save-path "./experiments/miniImageNet_subspace" --train-shot 15 --\
+  --head Subspace --network ResNet --dataset miniImageNet --eps 0.1
 ```
 
 Evaluate mini-ImageNet:
 
 ```
-        python3 test.py --gpu 0 --load ./experiments/miniImageNet_subspace/best_model.pth --episode 1000 \
-        --way 5 --shot 5 --query 15 --head Subspace --network ResNet --dataset miniImageNet
+  python3 test.py --gpu 0 --load ./experiments/miniImageNet_subspace/best_model.pth --episode 1000 \
+  --way 5 --shot 5 --query 15 --head Subspace --network ResNet --dataset miniImageNet
 ```
 
 ```
