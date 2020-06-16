@@ -1,5 +1,12 @@
 
 ## Adaptive Subspaces for Few-Shot Learning
+
+The repository contains the code for:
+<br/>
+[Adaptive Subspace for Few-Shot Learning](http://openaccess.thecvf.com/content_CVPR_2020/papers/Simon_Adaptive_Subspaces_for_Few-Shot_Learning_CVPR_2020_paper.pdf)
+<br/>
+CVPR 2020
+
 <img src="https://raw.githubusercontent.com/chrysts/chrysts.github.io/master/images/psn.jpg" width="700" height="200" />
 (Left) Matching Network, (Middle) Prototypical Network, (Right) Adaptive Subspace Network/Ours
 
@@ -22,19 +29,49 @@ There are two backbones separated in different folders.
 
 ## USAGE
 
+
+#### Conv-4
+
 Train mini-ImageNet:
 
-``` python3 train_subspace_discriminative.py --data-path 'yourdatafolder' ```
+```     python3 train_subspace_discriminative.py --data-path 'yourdatafolder' ```
 
 Evaluate mini-ImageNet:
 
-``` python3 test_subspace_discriminative.py --data-path 'yourdatafolder' ```
+```     python3 test_subspace_discriminative.py --data-path 'yourdatafolder' ```
 
 
 Train OpenMIC:
 
-```python3 train_subspace_museum.py --data-path 'yourdatafolder'  ```
+```     python3 train_subspace_museum.py --data-path 'yourdatafolder'  ```
 
+
+#### ResNet-12
+
+SET your image folders :
+- _IMAGENET_DATASET_DIR = './miniimagenet/'
+- _TIERED_IMAGENET_DATASET_DIR = '/tieredimagenet/' 
+- _CIFAR_FS_DATASET_DIR = './cifar/CIFAR-FS/'
+
+
+
+Train mini-ImageNet:
+
+```
+        python3 train.py --gpu 0,1,2,3 --save-path "./experiments/miniImageNet_subspace" --train-shot 15 --\
+        --head Subspace --network ResNet --dataset miniImageNet --eps 0.1
+```
+
+Evaluate mini-ImageNet:
+
+```
+        python3 test.py --gpu 0 --load ./experiments/miniImageNet_subspace/best_model.pth --episode 1000 \
+        --way 5 --shot 5 --query 15 --head Subspace --network ResNet --dataset miniImageNet
+```
+
+```
+options --dataset [miniImageNet, tieredImageNet, CIFAR_FS]
+```
 
 
 
