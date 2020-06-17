@@ -18,9 +18,9 @@ Comparison with previous methods:
 
 
 
-Head-to-head Subspaces VS Prototypes
+Robustness analysis: Head-to-head Subspaces VS Prototypes
 <br/>
-<img src="https://github.com/chrysts/dsn_fewshot/blob/master/robustness.png?raw=true"  height="440px" width="430px"  />
+<img src="https://github.com/chrysts/dsn_fewshot/blob/master/robustness.png?raw=true"  height="440px" width="450px"  />
 
 
 
