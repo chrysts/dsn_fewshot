@@ -17,8 +17,6 @@ Comparison with previous methods:
 <img src="https://github.com/chrysts/dsn_fewshot/blob/master/comparison.png?raw=true" height="145px" width="640px"  />
 
 
-
-
 ## OVERVIEW
 
 ### Requirements:
@@ -85,6 +83,13 @@ Evaluate mini-ImageNet:
 ```
 options --dataset [miniImageNet, tieredImageNet, CIFAR_FS]
 ```
+
+
+## Robustness 
+
+Head-to-head Subspaces VS Prototypes
+<br/>
+<img src="https://github.com/chrysts/dsn_fewshot/blob/master/robustness.png?raw=true"  height="440px" width="400px"  />
 
 
 
