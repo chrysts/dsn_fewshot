@@ -18,7 +18,7 @@ Comparison with previous methods:
 
 
 
-Robustness analysis: Head-to-head Subspaces VS Prototypes
+Robustness on toy data: subspaces VS prototypes
 <br/>
 <img src="https://github.com/chrysts/dsn_fewshot/blob/master/robustness.png?raw=true"  height="440px" width="450px"  />
 
