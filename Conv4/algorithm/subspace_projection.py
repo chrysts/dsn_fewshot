@@ -54,7 +54,7 @@ class Subspace_Projection(nn.Module):
 
             for k in range(class_size):
                 if j != k:
-                   temp_loss = torch.mm(torch.transpose(hyperplanes[j], 0, 1), hyperplanes[k])
+                   temp_loss = torch.mm(torch.transpose(hyperplanes[j], 0, 1), hyperplanes[k]) ## discriminative subspaces (Conv4 only, ResNet12 is computationally expensive)
                    discriminative_loss = discriminative_loss + torch.sum(temp_loss*temp_loss)
 
         similarities = torch.stack(similarities, dim=1)
