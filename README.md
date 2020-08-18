@@ -3,7 +3,7 @@
 
 The repository contains the code for:
 <br/>
-[Adaptive Subspace for Few-Shot Learning](http://openaccess.thecvf.com/content_CVPR_2020/papers/Simon_Adaptive_Subspaces_for_Few-Shot_Learning_CVPR_2020_paper.pdf)
+[Adaptive Subspaces for Few-Shot Learning](http://openaccess.thecvf.com/content_CVPR_2020/papers/Simon_Adaptive_Subspaces_for_Few-Shot_Learning_CVPR_2020_paper.pdf)
 <br/>
 CVPR 2020
 
