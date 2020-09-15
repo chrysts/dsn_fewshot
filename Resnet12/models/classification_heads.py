@@ -323,7 +323,8 @@ def SubspaceNetHead(query, support, support_labels, n_way, n_shot, normalize=Tru
     for cc in range(tasks_per_batch*n_way):
         batch_idx = cc//n_way
         qq = query[batch_idx]
-        uu, _, _ = torch.svd(class_representatives[cc])
+        uu, _, _ = torch.svd(class_representatives[cc].double())
+        uu = uu.float()
         subspace = uu[:, :n_shot-1].transpose(0, 1)
         projection = subspace.transpose(0, 1).mm(subspace.mm(qq.transpose(0, 1))).transpose(0, 1)
         dist_perclass = torch.sum((qq - projection)**2, dim=-1)
