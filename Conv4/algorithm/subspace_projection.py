@@ -16,7 +16,8 @@ class Subspace_Projection(nn.Module):
             means.append(meann)
             all_support_within_class_t = all_support_within_class_t - meann.unsqueeze(0).repeat(num_sample, 1)
             all_support_within_class = torch.transpose(all_support_within_class_t, 0, 1)
-            uu, s, v = torch.svd(all_support_within_class, some=False)
+            uu, s, v = torch.svd(all_support_within_class.double(), some=False)
+            uu = uu.float()
             all_hyper_planes.append(uu[:, :self.num_dim])
 
         all_hyper_planes = torch.stack(all_hyper_planes, dim=0)
