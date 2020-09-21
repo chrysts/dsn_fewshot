@@ -101,9 +101,9 @@ if __name__ == '__main__':
                             help='number of training epochs')
     parser.add_argument('--save-epoch', type=int, default=5,
                             help='frequency of model saving')
-    parser.add_argument('--train-shot', type=int, default=2,
+    parser.add_argument('--train-shot', type=int, default=15,
                             help='number of support examples per training class')
-    parser.add_argument('--val-shot', type=int, default=5,
+    parser.add_argument('--val-shot', type=int, default=6,
                             help='number of support examples per validation class')
     parser.add_argument('--train-query', type=int, default=5,
                             help='number of query examples per training class')
