@@ -16,7 +16,7 @@ from models.ResNet12_embedding import resnet12
 import torch.nn as nn
 from utils import set_gpu, Timer, count_accuracy, check_dir, log
 
-os.environ['CUDA_VISIBLE_DEVICES'] = "0,3"
+os.environ['CUDA_VISIBLE_DEVICES'] = "0,1,2,3"
 #print(torch.cuda.get_device_properties(3))
 #print("asd")
 
