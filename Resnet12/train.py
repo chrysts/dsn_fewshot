@@ -105,7 +105,7 @@ if __name__ == '__main__':
                             help='number of support examples per training class')
     parser.add_argument('--val-shot', type=int, default=5,
                             help='number of support examples per validation class')
-    parser.add_argument('--train-query', type=int, default=10,
+    parser.add_argument('--train-query', type=int, default=5,
                             help='number of query examples per training class')
     parser.add_argument('--val-episode', type=int, default=600,
                             help='number of episodes per validation')
