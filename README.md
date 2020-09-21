@@ -36,10 +36,13 @@ There are two backbones separated in different folders.
 
 
 ## DATASET
-- mini-ImageNet: [Google Drive](https://drive.google.com/file/d/1HkgrkAwukzEZA0TpO7010PkAOREb2Nuk) (3 GB)
-- tiered-ImageNet: [Google Drive](https://drive.google.com/file/d/1g1aIDy2Ar_MViF2gDXFYDBTR-HYecV07) (12 GB)
+- mini-ImageNet - Conv4: [Google Drive](https://drive.google.com/file/d/1HkgrkAwukzEZA0TpO7010PkAOREb2Nuk) (3 GB)
+- mini-ImageNet - ResNet12: [Google Drive](https://drive.google.com/file/d/1fJAK5WZTjerW7EWHHQAR9pRJVNg1T1Y7) ** (2 GB)
+- tiered-ImageNet: [Google Drive](https://drive.google.com/file/d/1nVGCTd9ttULRXFezh4xILQ9lUkg0WZCG) ** (13 GB) 
 - OpenMIC: [Fill the request form](http://users.cecs.anu.edu.au/~koniusz/openmic-dataset#openmic_req) and [Download](http://users.cecs.anu.edu.au/~koniusz/openmic-dataset/data/openmic_dsn_fewshot.zip) (0.3 GB)
 - CIFAR100: [CS TORONTO](https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz) (0.2 GB)
+
+ ** Adopted from [Kwonjoon Lee](https://github.com/kjunelee/MetaOptNet)
 
 ## USAGE
 
