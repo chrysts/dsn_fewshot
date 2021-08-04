@@ -49,8 +49,7 @@ if __name__ == '__main__':
                             num_workers=8, pin_memory=True)
 
     model = ConvNet().cuda()
-    projection_pro = Subspace_Projection(num_dim=args.subspace_dim)
-
+   
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
     if args.shot > 1:
@@ -63,7 +62,9 @@ if __name__ == '__main__':
         args.subspace_dim = 1
     else:
         shot_num = args.shot
-
+    
+     projection_pro = Subspace_Projection(num_dim=args.subspace_dim)
+    
     def save_model(name):
         if not os.path.exists(args.save_path):
             os.mkdir(args.save_path)
