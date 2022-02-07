@@ -43,6 +43,9 @@ There are two backbones separated in different folders.
 - CIFAR100: [CS TORONTO](https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz) (0.2 GB)
 
  ** Adopted from [Kwonjoon Lee](https://github.com/kjunelee/MetaOptNet)
+- https://github.com/chrysts/dsn_fewshot/files/6934751/max-acc.pth.zip
+
+## Pretrained network
 
 ## USAGE
 
