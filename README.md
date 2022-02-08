@@ -45,7 +45,7 @@ There are two backbones separated in different folders.
  ** Adopted from [Kwonjoon Lee](https://github.com/kjunelee/MetaOptNet)
 
 ## Pretrained network
-[Model](https://github.com/chrysts/dsn_fewshot/files/6934751/max-acc.pth.zip)
+[Pretrained Models](https://drive.google.com/file/d/1jmO5jmYLbMDM9ceMpEc0XDZhWRsJzQ2o)
 ## USAGE
 
 
