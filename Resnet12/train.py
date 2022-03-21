@@ -80,12 +80,12 @@ def get_dataset(options):
         data_loader = FewShotDataloader
     elif options.dataset == 'tieredImageNet':
         from data.tiered_imagenet import tieredImageNet, FewShotDataloader
-        dataset_train = tieredImageNet(phase='train')
+        dataset_train = tieredImageNet(phase='trainval')
         dataset_val = tieredImageNet(phase='test')
         data_loader = FewShotDataloader
     elif options.dataset == 'CIFAR_FS':
         from data.CIFAR_FS import CIFAR_FS, FewShotDataloader
-        dataset_train = CIFAR_FS(phase='train')
+        dataset_train = CIFAR_FS(phase='trainval')
         dataset_val = CIFAR_FS(phase='test')
         data_loader = FewShotDataloader
 
